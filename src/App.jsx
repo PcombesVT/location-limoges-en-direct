@@ -2,8 +2,14 @@ import React, { useState } from 'react';
 import { Home } from './pages/Home';
 import { Hub } from './pages/Hub';
 import { Apartment } from './pages/Apartment';
+import { Admin } from './pages/Admin';
 
 function App() {
+  const path = window.location.pathname;
+  if (path.startsWith('/admin')) {
+    return <Admin />;
+  }
+
   const [currentPage, setCurrentPage] = useState('home');
   const [selectedAptId, setSelectedAptId] = useState(null);
 
