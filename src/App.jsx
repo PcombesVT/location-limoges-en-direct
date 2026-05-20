@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { Home } from './pages/Home';
 import { Hub } from './pages/Hub';
 import { Apartment } from './pages/Apartment';
-import { Admin } from './pages/Admin';
+
+// Import "Paresseux" du CMS pour ne pas l'imprimer sur la page d'accueil !
+const Admin = lazy(() => import('./pages/Admin').then(m => ({ default: m.Admin })));
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -10,7 +12,11 @@ function App() {
 
   const path = window.location.pathname;
   if (path.startsWith('/admin')) {
-    return <Admin />;
+    return (
+      <Suspense fallback={<div style={{padding: '3rem', color: 'white'}}>Chargement sécurisé du CMS...</div>}>
+        <Admin />
+      </Suspense>
+    );
   }
 
   const handleViewApt = (id) => {
