@@ -14,9 +14,7 @@
     "@sanity/image-url": "^1.0.2",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "sanity": "^3.40.0",
-    "styled-components": "^6.1.8",
-    "util": "^0.12.5"
+    "sanity": "^3.40.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
