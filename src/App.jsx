@@ -5,13 +5,13 @@ import { Apartment } from './pages/Apartment';
 import { Admin } from './pages/Admin';
 
 function App() {
+  const [currentPage, setCurrentPage] = useState('home');
+  const [selectedAptId, setSelectedAptId] = useState(null);
+
   const path = window.location.pathname;
   if (path.startsWith('/admin')) {
     return <Admin />;
   }
-
-  const [currentPage, setCurrentPage] = useState('home');
-  const [selectedAptId, setSelectedAptId] = useState(null);
 
   const handleViewApt = (id) => {
     setSelectedAptId(id);
