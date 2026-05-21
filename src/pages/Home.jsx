@@ -1,7 +1,6 @@
 import React from 'react';
-import { apartments } from '../data/apartments';
 
-export function Home({ onViewApt }) {
+export function Home({ onViewApt, apartments, loading }) {
   return (
     <>
       <header style={{ paddingTop: '120px', paddingBottom: '60px', textAlign: 'center' }}>
@@ -23,41 +22,51 @@ export function Home({ onViewApt }) {
       <main className="container" id="appartements" style={{ paddingBottom: '80px' }}>
         <h2 style={{ borderBottom: '1px solid var(--glass-border)', paddingBottom: '1rem' }}>Disponibilités Actuelles</h2>
         
-        <div className="property-grid">
-          {apartments.map((apt) => (
-            <div key={apt.id} className="glass-card">
-              <img 
-                src={apt.images[0]} 
-                alt={apt.title} 
-                style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', marginBottom: '1rem' }} 
-              />
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                <span className={`badge ${apt.available ? 'badge-success' : 'badge-warning'}`}>
-                  {apt.available ? 'Disponible' : 'Bientôt Dispo'}
-                </span>
-                <span style={{ fontWeight: 'bold', color: 'var(--accent-secondary)' }}>{apt.type} • {apt.size}m²</span>
-              </div>
-              <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>{apt.title}</h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1rem' }}>📍 {apt.location}</p>
-              
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.5rem' }}>
-                {apt.features.slice(0, 3).map(f => (
-                  <span key={f} style={{ fontSize: '0.8rem', background: 'rgba(255,255,255,0.05)', padding: '0.2rem 0.6rem', borderRadius: '4px' }}>
-                    {f}
+        {loading ? (
+          <div style={{ textAlign: 'center', padding: '4rem 0', color: 'var(--text-secondary)' }}>
+            <p style={{fontSize: '1.2rem'}}>Chargement des appartements disponibles...</p>
+          </div>
+        ) : apartments.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '4rem 0', color: 'var(--text-secondary)' }}>
+            <p style={{fontSize: '1.2rem'}}>Aucun appartement publié pour le moment.</p>
+          </div>
+        ) : (
+          <div className="property-grid">
+            {apartments.map((apt) => (
+              <div key={apt.id} className="glass-card">
+                <img 
+                  src={apt.images[0]} 
+                  alt={apt.title} 
+                  style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', marginBottom: '1rem' }} 
+                />
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                  <span className={`badge ${apt.available ? 'badge-success' : 'badge-warning'}`}>
+                    {apt.available ? 'Disponible' : 'Bientôt Dispo'}
                   </span>
-                ))}
-              </div>
-
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', paddingTop: '1rem', borderTop: '1px solid var(--glass-border)' }}>
-                <div>
-                  <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{apt.price}€</span>
-                  <span style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>/mois + {apt.charges}€ ch.</span>
+                  <span style={{ fontWeight: 'bold', color: 'var(--accent-secondary)' }}>{apt.type} • {apt.size}m²</span>
                 </div>
-                <button onClick={() => onViewApt(apt.id)} className="btn btn-outline" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem', cursor: 'pointer' }}>Voir la fiche</button>
+                <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>{apt.title}</h3>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1rem' }}>📍 {apt.location}</p>
+                
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.5rem' }}>
+                  {apt.features.slice(0, 3).map(f => (
+                    <span key={f} style={{ fontSize: '0.8rem', background: 'rgba(255,255,255,0.05)', padding: '0.2rem 0.6rem', borderRadius: '4px' }}>
+                      {f}
+                    </span>
+                  ))}
+                </div>
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', paddingTop: '1rem', borderTop: '1px solid var(--glass-border)' }}>
+                  <div>
+                    <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{apt.price}€</span>
+                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>/mois + {apt.charges}€ ch.</span>
+                  </div>
+                  <button onClick={() => onViewApt(apt.id)} className="btn btn-outline" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem', cursor: 'pointer' }}>Voir la fiche</button>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </main>
     </>
   );

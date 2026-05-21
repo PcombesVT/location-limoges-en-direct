@@ -1,8 +1,14 @@
 import React from 'react';
-import { apartments } from '../data/apartments';
 
-export function Apartment({ id = "studio-meissonier-hyper-centre", onBack }) {
-  const apt = apartments.find(a => a.id === id) || apartments[0];
+export function Apartment({ apt, onBack }) {
+  if (!apt) {
+    return (
+      <div className="container" style={{ paddingTop: '150px', textAlign: 'center', minHeight: '60vh' }}>
+        <h2>Appartement introuvable</h2>
+        <button onClick={onBack} className="btn btn-primary" style={{marginTop: '2rem'}}>← Retour à l'accueil</button>
+      </div>
+    );
+  }
 
   return (
     <>
