@@ -1,6 +1,43 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { sanityClient, urlFor } from '../sanity/client';
 
-export function Home({ onViewApt, apartments, loading }) {
+export function Home() {
+  const [apartments, setApartments] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    sanityClient.fetch(`*[_type == "appartement" && published == true] | order(_createdAt desc)`).then((data) => {
+      const formatted = data.map(doc => ({
+        id: doc._id,
+        slug: doc.slug?.current,
+        title: doc.title || 'Sans titre public',
+        location: doc.address || 'Limoges',
+        price: doc.price || 0,
+        charges: doc.charges || 0,
+        size: doc.surface || 0,
+        type: doc.bedrooms > 0 ? `T${doc.bedrooms + 1}` : 'Studio',
+        available: doc.availableDate ? new Date(doc.availableDate) <= new Date() : true,
+        images: doc.images ? doc.images.map(img => urlFor(img).url()) : ['/placeholder.svg'],
+        features: [
+          doc.fiber && 'Fibre Optique',
+          doc.furnished && 'Meublé',
+          doc.bikeStorage && 'Local Vélo',
+          doc.elevator && 'Ascenseur',
+          doc.parking && 'Parking',
+          doc.intercom && 'Interphone',
+          doc.videoIntercom && 'Visiophone'
+        ].filter(Boolean),
+        description: doc.description || 'Description à venir.'
+      }));
+      setApartments(formatted);
+      setLoading(false);
+    }).catch(err => {
+      console.error("Erreur de chargement Sanity:", err);
+      setLoading(false);
+    });
+  }, []);
+
   return (
     <>
       <header style={{ paddingTop: '120px', paddingBottom: '60px', textAlign: 'center' }}>
@@ -61,7 +98,11 @@ export function Home({ onViewApt, apartments, loading }) {
                     <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{apt.price}€</span>
                     <span style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>/mois + {apt.charges}€ ch.</span>
                   </div>
-                  <button onClick={() => onViewApt(apt.id)} className="btn btn-outline" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem', cursor: 'pointer' }}>Voir la fiche</button>
+                  {apt.slug ? (
+                    <Link to={`/logement/${apt.slug}`} className="btn btn-outline" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem', cursor: 'pointer', textDecoration: 'none' }}>Voir la fiche</Link>
+                  ) : (
+                    <button disabled className="btn" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem', opacity: 0.5 }}>Erreur d'URL</button>
+                  )}
                 </div>
               </div>
             ))}

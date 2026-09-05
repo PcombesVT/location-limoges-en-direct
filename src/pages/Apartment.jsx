@@ -1,20 +1,95 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { sanityClient, urlFor } from '../sanity/client';
 
-export function Apartment({ apt, onBack }) {
-  if (!apt) {
+export function Apartment() {
+  const { slug } = useParams();
+  const [apt, setApt] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    sanityClient.fetch(`*[_type == "appartement" && slug.current == $slug][0]`, { slug }).then((doc) => {
+      if (doc) {
+        setApt({
+          id: doc._id,
+          title: doc.title || 'Sans titre public',
+          location: doc.address || 'Limoges',
+          price: doc.price || 0,
+          charges: doc.charges || 0,
+          size: doc.surface || 0,
+          type: doc.bedrooms > 0 ? `T${doc.bedrooms + 1}` : 'Studio',
+          available: doc.availableDate ? new Date(doc.availableDate) <= new Date() : true,
+          images: doc.images ? doc.images.map(img => urlFor(img).url()) : ['/placeholder.svg'],
+          features: [
+            doc.fiber && 'Fibre Optique',
+            doc.furnished && 'Meublé',
+            doc.bikeStorage && 'Local Vélo',
+            doc.elevator && 'Ascenseur',
+            doc.parking && 'Parking',
+            doc.intercom && 'Interphone',
+            doc.videoIntercom && 'Visiophone'
+          ].filter(Boolean),
+          description: doc.description || 'Description à venir.'
+        });
+      }
+      setLoading(false);
+    }).catch(err => {
+      console.error("Erreur de chargement Sanity:", err);
+      setLoading(false);
+    });
+  }, [slug]);
+
+  if (loading) {
     return (
       <div className="container" style={{ paddingTop: '150px', textAlign: 'center', minHeight: '60vh' }}>
-        <h2>Appartement introuvable</h2>
-        <button onClick={onBack} className="btn btn-primary" style={{marginTop: '2rem'}}>← Retour à l'accueil</button>
+        <h2>Chargement de l'appartement...</h2>
       </div>
     );
   }
 
+  if (!apt) {
+    return (
+      <div className="container" style={{ paddingTop: '150px', textAlign: 'center', minHeight: '60vh' }}>
+        <h2>Appartement introuvable</h2>
+        <Link to="/" className="btn btn-primary" style={{marginTop: '2rem', textDecoration: 'none'}}>← Retour à l'accueil</Link>
+      </div>
+    );
+  }
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Apartment",
+    "name": apt.title,
+    "description": apt.description,
+    "numberOfRoomsTotal": apt.type === 'Studio' ? 1 : parseInt(apt.type.replace('T', '')),
+    "floorSize": { "@type": "QuantitativeValue", "value": apt.size, "unitCode": "MTK" },
+    "address": { "@type": "PostalAddress", "streetAddress": apt.location, "addressLocality": "Limoges", "postalCode": "87000", "addressCountry": "FR" },
+    "offers": { "@type": "Offer", "price": apt.price, "priceCurrency": "EUR", "availability": "https://schema.org/InStock" }
+  };
+
+  const handleDepositClick = () => {
+    const input = document.getElementById('bien-input');
+    if (input) input.value = apt.title;
+    const modal = document.getElementById('lead-modal');
+    if (modal) modal.showModal();
+  };
+
   return (
     <>
+      <Helmet>
+        <title>{`${apt.title} | Location Limoges en Direct`}</title>
+        <meta name="description" content={`Découvrez ce ${apt.type} de ${apt.size}m² à louer sur Limoges. Loyer : ${apt.price}€/mois sans frais d'agence.`} />
+        <link rel="canonical" href={`https://www.location-limoges-en-direct.fr/logement/${slug}`} />
+        <script type="application/ld+json">
+          {JSON.stringify(jsonLd)}
+        </script>
+      </Helmet>
+
       <header style={{ paddingTop: '120px', paddingBottom: '40px', background: 'var(--bg-color-light)' }}>
         <div className="container">
-          <button onClick={onBack} className="btn btn-outline" style={{marginBottom: '2rem'}}>← Retour aux locs</button>
+          <Link to="/" className="btn btn-outline" style={{marginBottom: '2rem', textDecoration: 'none'}}>← Retour aux locs</Link>
           
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap' }}>
             <span className={`badge ${apt.available ? 'badge-success' : 'badge-warning'}`}>
@@ -47,19 +122,6 @@ export function Apartment({ apt, onBack }) {
                 </li>
               ))}
             </ul>
-
-            <div className="glass-card" style={{marginTop: '3rem', background: 'rgba(56,189,248,0.05)', borderColor: 'rgba(56,189,248,0.2)'}}>
-              <h3 style={{marginBottom: '1rem', color: '#38bdf8', display:'flex', alignItems:'center', gap:'0.5rem'}}>
-                <span>📍</span> Distances & Campus (Modele)
-              </h3>
-              <p style={{color: 'var(--text-secondary)'}}>
-                Dès que les adresses exactes seront fournies, ce bloc calculera et affichera automatiquement la distance et le temps de trajet idéaux :
-              </p>
-              <ul style={{marginTop: '1rem', color: 'var(--text-secondary)'}}>
-                <li>🎓 A X min à pied de la Faculté (Sciences, Médecine...)</li>
-                <li>🚌 A X min de l'arrêt de bus le plus proche</li>
-              </ul>
-            </div>
           </div>
 
           {/* Colonne Droite : Prix et Action */}
@@ -85,7 +147,7 @@ export function Apartment({ apt, onBack }) {
               </div>
             </div>
 
-            <button className="btn btn-primary" style={{width: '100%', marginBottom: '1rem', padding: '1.2rem'}}>
+            <button onClick={handleDepositClick} className="btn btn-primary" style={{width: '100%', marginBottom: '1rem', padding: '1.2rem', cursor: 'pointer'}}>
               Déposer mon dossier 🚀
             </button>
             <p style={{fontSize: '0.85rem', textAlign: 'center', color: 'var(--text-secondary)'}}>Contactez moi en direct. Etude rapide des garanties.</p>
