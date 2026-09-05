@@ -17,9 +17,9 @@ export function LegalMentions() {
           <h2>1. Éditeur du site</h2>
           <p>
             Le présent site est édité par un propriétaire particulier.<br />
-            <strong>Nom / Prénom :</strong> [À COMPLÉTER]<br />
-            <strong>Adresse :</strong> [À COMPLÉTER]<br />
-            <strong>Contact :</strong> [À COMPLÉTER (Email ou Téléphone)]
+            <strong>Nom / Prénom :</strong> Pierre Combes<br />
+            <strong>Adresse :</strong> 4 chemin de Lespinas, 31320 Vieille Toulouse<br />
+            <strong>Contact :</strong> pierrecombes@hotmail.com
           </p>
         </section>
 
