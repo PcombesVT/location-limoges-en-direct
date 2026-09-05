@@ -42,13 +42,14 @@ async function generateSitemap() {
 
     xml += `\n</urlset>`;
 
-    const publicPath = path.join(process.cwd(), 'public');
-    if (!fs.existsSync(publicPath)) {
-      fs.mkdirSync(publicPath);
-    }
-    
-    fs.writeFileSync(path.join(publicPath, 'sitemap.xml'), xml);
-    console.log("✅ sitemap.xml généré avec succès dans le dossier public/ !");
+    const dirs = ['dist', 'public'];
+    dirs.forEach(d => {
+      const out = path.join(process.cwd(), d);
+      if (fs.existsSync(out)) {
+        fs.writeFileSync(path.join(out, 'sitemap.xml'), xml);
+      }
+    });
+    console.log("✅ sitemap.xml écrit dans dist/ et public/ !");
   } catch (error) {
     console.error("❌ Erreur lors de la génération du sitemap:", error);
     process.exit(1);
