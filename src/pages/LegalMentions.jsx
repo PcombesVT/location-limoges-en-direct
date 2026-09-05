@@ -18,7 +18,7 @@ export function LegalMentions() {
           <p>
             Le présent site est édité par un propriétaire particulier.<br />
             <strong>Nom / Prénom :</strong> Pierre Combes<br />
-            <strong>Adresse :</strong> 4 chemin de Lespinas, 31320 Vieille Toulouse<br />
+            <strong>Adresse :</strong> 7 rue des Cordelières, 75013 Paris<br />
             <strong>Contact :</strong> pierrecombes@hotmail.com
           </p>
         </section>

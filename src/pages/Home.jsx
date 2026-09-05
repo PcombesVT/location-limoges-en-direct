@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { sanityClient, urlFor } from '../sanity/client';
 
 export function Home() {
@@ -40,6 +41,12 @@ export function Home() {
 
   return (
     <>
+      <Helmet>
+        <title>Location Étudiant Limoges | Direct Propriétaire 0 Frais</title>
+        <meta name="description" content="Trouvez votre logement étudiant à Limoges sans frais d'agence : studios et T2 meublés, en direct propriétaire. Éligible APL/ALS." />
+        <link rel="canonical" href="https://www.location-limoges-en-direct.fr/" />
+      </Helmet>
+      
       <header style={{ paddingTop: '120px', paddingBottom: '60px', textAlign: 'center' }}>
         <div className="container animate-fade-in">
           <div className="badge badge-success" style={{ marginBottom: '1rem', display: 'inline-block' }}>De Particulier à Particulier</div>

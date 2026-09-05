@@ -66,7 +66,7 @@ export function Apartment() {
     "numberOfRoomsTotal": apt.type === 'Studio' ? 1 : parseInt(apt.type.replace('T', '')),
     "floorSize": { "@type": "QuantitativeValue", "value": apt.size, "unitCode": "MTK" },
     "address": { "@type": "PostalAddress", "streetAddress": apt.location, "addressLocality": "Limoges", "postalCode": "87000", "addressCountry": "FR" },
-    "offers": { "@type": "Offer", "price": apt.price, "priceCurrency": "EUR", "availability": "https://schema.org/InStock" }
+    "offers": { "@type": "Offer", "price": apt.price, "priceCurrency": "EUR", "availability": apt.available ? "https://schema.org/InStock" : "https://schema.org/PreOrder" }
   };
 
   const handleDepositClick = () => {
