@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.location-limoges-en-direct.fr/sitemap.xml
