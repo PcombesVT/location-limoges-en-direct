@@ -32,7 +32,9 @@ export function Apartment() {
             doc.intercom && 'Interphone',
             doc.videoIntercom && 'Visiophone'
           ].filter(Boolean),
-          description: doc.description || 'Description à venir.'
+          description: doc.description || 'Description à venir.',
+          dpe: doc.dpe || null,
+          ges: doc.ges || null
         });
       }
       setLoading(false);
@@ -150,6 +152,12 @@ export function Apartment() {
                 <span style={{color: 'var(--text-secondary)'}}>Surface</span>
                 <span style={{fontWeight: 'bold', fontSize: '1.1rem'}}>{apt.size} m²</span>
               </div>
+              {(apt.dpe || apt.ges) && (
+                <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', paddingBottom: '0.5rem', borderBottom: '1px dashed rgba(255,255,255,0.1)'}}>
+                  <span style={{color: 'var(--text-secondary)'}}>DPE / GES</span>
+                  <span style={{fontWeight: 'bold', fontSize: '1.1rem'}}>{apt.dpe || '-'} / {apt.ges || '-'}</span>
+                </div>
+              )}
               <div style={{display: 'flex', justifyContent: 'space-between'}}>
                 <span style={{color: 'var(--text-secondary)'}}>Honoraires d'agence</span>
                 <span style={{fontWeight: 'bold', color: '#10b981', fontSize: '1.1rem'}}>Gratuit (0 €)</span>
