@@ -121,7 +121,7 @@ export function Apartment() {
             )}
             
             <h2 style={{borderBottom: '1px solid var(--glass-border)', paddingBottom: '1rem', marginTop: '3rem', fontSize: '1.8rem'}}>Description</h2>
-            <p style={{color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8'}}>{apt.description}</p>
+            <p style={{color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8', whiteSpace: 'pre-wrap'}}>{apt.description}</p>
             
             <h2 style={{borderBottom: '1px solid var(--glass-border)', paddingBottom: '1rem', marginTop: '3rem', fontSize: '1.8rem'}}>Prestations Incluses</h2>
             <ul style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', color: 'var(--text-secondary)', marginTop: '2rem'}}>
