@@ -37,7 +37,9 @@ export function Apartment() {
           ges: doc.ges || null,
           rented: doc.rented || false,
           apl: doc.apl || false,
-          als: doc.als || false
+          als: doc.als || false,
+          floor: doc.floor || null,
+          heatingType: doc.heatingType || null
         });
       }
       setLoading(false);
@@ -164,6 +166,18 @@ export function Apartment() {
                 <span style={{color: 'var(--text-secondary)'}}>Surface</span>
                 <span style={{fontWeight: 'bold', fontSize: '1.1rem'}}>{apt.size} m²</span>
               </div>
+              {apt.floor && (
+                <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', paddingBottom: '0.5rem', borderBottom: '1px dashed rgba(255,255,255,0.1)'}}>
+                  <span style={{color: 'var(--text-secondary)'}}>Étage</span>
+                  <span style={{fontWeight: 'bold', fontSize: '1.1rem'}}>{apt.floor}</span>
+                </div>
+              )}
+              {apt.heatingType && (
+                <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', paddingBottom: '0.5rem', borderBottom: '1px dashed rgba(255,255,255,0.1)'}}>
+                  <span style={{color: 'var(--text-secondary)'}}>Chauffage</span>
+                  <span style={{fontWeight: 'bold', fontSize: '1.1rem', textAlign: 'right'}}>{apt.heatingType}</span>
+                </div>
+              )}
               {(apt.dpe || apt.ges) && (
                 <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', paddingBottom: '0.5rem', borderBottom: '1px dashed rgba(255,255,255,0.1)'}}>
                   <span style={{color: 'var(--text-secondary)'}}>DPE / GES</span>
