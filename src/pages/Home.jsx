@@ -17,7 +17,7 @@ export function Home() {
         price: doc.price || 0,
         charges: doc.charges || 0,
         size: doc.surface || 0,
-        type: doc.bedrooms > 0 ? `T${doc.bedrooms + 1}` : 'Studio',
+        type: doc.apartmentType ? doc.apartmentType : (doc.bedrooms > 0 ? `T${doc.bedrooms + 1}` : 'Studio'),
         available: doc.availableDate ? new Date(doc.availableDate) <= new Date() : true,
         availableDateStr: doc.availableDate ? new Date(doc.availableDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' }) : null,
         rented: doc.rented || false,
