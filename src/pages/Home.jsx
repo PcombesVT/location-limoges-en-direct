@@ -44,8 +44,8 @@ export function Home() {
   return (
     <>
       <Helmet>
-        <title>Location Étudiant Limoges | Direct Propriétaire 0 Frais</title>
-        <meta name="description" content="Trouvez votre logement étudiant à Limoges sans frais d'agence : studios et T2 meublés, en direct propriétaire. Éligible APL/ALS." />
+        <title>Location appartement & studio à Limoges — entre particuliers, sans agence | En Direct</title>
+        <meta name="description" content="Location d'appartements et studios à Limoges en direct du propriétaire. Zéro frais d'agence, entre particuliers. Logements meublés étudiants éligibles APL/ALS." />
         <link rel="canonical" href="https://www.location-limoges-en-direct.fr/" />
       </Helmet>
       
@@ -53,11 +53,11 @@ export function Home() {
         <div className="container animate-fade-in">
           <div className="badge badge-success" style={{ marginBottom: '1rem', display: 'inline-block' }}>De Particulier à Particulier</div>
           <h1>
-            Votre Logement Étudiant à Limoges<br />
-            <span className="text-gradient">Sans Frais d'Agence.</span>
+            Location appartement & studio à Limoges<br />
+            <span className="text-gradient">Sans agence, direct propriétaire.</span>
           </h1>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '600px', margin: '0 auto 2rem auto' }}>
-            Accédez directement à mon parc locatif privé (Studios, T2). Des logements pensés pour les étudiants, sans intermédiaire, 0€ de frais de dossier.
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '700px', margin: '0 auto 2rem auto', lineHeight: '1.6' }}>
+            Louez votre logement étudiant à Limoges en direct avec le propriétaire. Parcourez nos disponibilités de studios, T1 et T2 meublés. Profitez d'une location entre particuliers avec zéro frais d'agence. Logements éligibles aux aides de la CAF (APL / ALS).
           </p>
           <a href="#appartements" className="btn btn-primary" style={{ fontSize: '1.1rem', padding: '1rem 2rem' }}>
             Voir les appartements disponibles

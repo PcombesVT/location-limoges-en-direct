@@ -71,7 +71,8 @@ export function Apartment() {
     "@type": "Apartment",
     "name": apt.title,
     "description": apt.description,
-    "numberOfRoomsTotal": apt.type === 'Studio' ? 1 : parseInt(apt.type.replace('T', '')),
+    "image": apt.images,
+    "numberOfRoomsTotal": apt.type === 'Studio' ? 1 : parseInt(apt.type.replace('T', '') || 1),
     "floorSize": { "@type": "QuantitativeValue", "value": apt.size, "unitCode": "MTK" },
     "address": { "@type": "PostalAddress", "streetAddress": apt.location, "addressLocality": "Limoges", "postalCode": "87000", "addressCountry": "FR" },
     "offers": { "@type": "Offer", "price": apt.price, "priceCurrency": "EUR", "availability": apt.available ? "https://schema.org/InStock" : "https://schema.org/PreOrder" }
@@ -90,6 +91,16 @@ export function Apartment() {
         <title>{`${apt.title} | Location Limoges en Direct`}</title>
         <meta name="description" content={`Découvrez ce ${apt.type} de ${apt.size}m² à louer sur Limoges. Loyer : ${apt.price}€/mois sans frais d'agence.`} />
         <link rel="canonical" href={`https://www.location-limoges-en-direct.fr/logement/${slug}`} />
+        <meta property="og:title" content={`${apt.title} | Location Limoges en Direct`} />
+        <meta property="og:description" content={`Découvrez ce ${apt.type} de ${apt.size}m² à louer sur Limoges. Loyer : ${apt.price}€/mois sans frais d'agence.`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={`https://www.location-limoges-en-direct.fr/logement/${slug}`} />
+        <meta property="og:image" content={apt.images[0]} />
+        <meta property="og:locale" content="fr_FR" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${apt.title} | Location Limoges en Direct`} />
+        <meta name="twitter:description" content={`Découvrez ce ${apt.type} de ${apt.size}m² à louer sur Limoges. Loyer : ${apt.price}€/mois sans frais d'agence.`} />
+        <meta name="twitter:image" content={apt.images[0]} />
         <script type="application/ld+json">
           {JSON.stringify(jsonLd)}
         </script>
