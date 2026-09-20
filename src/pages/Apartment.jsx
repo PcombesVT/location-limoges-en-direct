@@ -35,7 +35,9 @@ export function Apartment() {
           description: doc.description || 'Description à venir.',
           dpe: doc.dpe || null,
           ges: doc.ges || null,
-          rented: doc.rented || false
+          rented: doc.rented || false,
+          apl: doc.apl || false,
+          als: doc.als || false
         });
       }
       setLoading(false);
@@ -100,7 +102,9 @@ export function Apartment() {
               {apt.rented ? 'DÉJÀ LOUÉ' : apt.available ? 'Disponible de suite' : `Dispo le ${apt.availableDateStr}`}
             </span>
             <span className="badge" style={{background: 'rgba(236,72,153,0.1)', color: '#ec4899'}}>🔥 0€ Frais d'Agence</span>
-            <span className="badge" style={{background: 'rgba(56,189,248,0.1)', color: '#38bdf8'}}>Eligible APL / ALS</span>
+            {apt.apl && apt.als && <span className="badge" style={{background: 'rgba(56,189,248,0.1)', color: '#38bdf8'}}>Eligible APL / ALS</span>}
+            {apt.apl && !apt.als && <span className="badge" style={{background: 'rgba(56,189,248,0.1)', color: '#38bdf8'}}>Eligible APL</span>}
+            {!apt.apl && apt.als && <span className="badge" style={{background: 'rgba(56,189,248,0.1)', color: '#38bdf8'}}>Eligible ALS</span>}
           </div>
 
           <h1 style={{fontSize: '2.5rem', marginBottom: '0.5rem'}}>{apt.title}</h1>
@@ -113,7 +117,14 @@ export function Apartment() {
           
           {/* Colonne Gauche : Photos & Description */}
           <div>
-            <img src={apt.images[0]} alt={apt.title} style={{width: '100%', height: '450px', objectFit: 'cover', borderRadius: 'var(--border-radius)', marginBottom: '1rem', boxShadow: 'var(--shadow-lg)', filter: apt.rented ? 'grayscale(80%) opacity(80%)' : 'none'}} />
+            <div style={{ position: 'relative', width: '100%', marginBottom: '1rem' }}>
+              <img src={apt.images[0]} alt={apt.title} style={{width: '100%', height: '450px', objectFit: 'cover', borderRadius: 'var(--border-radius)', boxShadow: 'var(--shadow-lg)', filter: apt.rented ? 'grayscale(100%) opacity(60%)' : 'none'}} />
+              {apt.rented && (
+                <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(239, 68, 68, 0.9)', color: 'white', padding: '1rem 2rem', fontSize: '2rem', fontWeight: 'bold', borderRadius: '8px', border: '2px solid white', textShadow: '0 2px 4px rgba(0,0,0,0.5)', zIndex: 10, textAlign: 'center', pointerEvents: 'none' }}>
+                  DÉJÀ LOUÉ
+                </div>
+              )}
+            </div>
             
             {apt.images.length > 1 && (
               <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: '1rem', marginBottom: '2rem'}}>

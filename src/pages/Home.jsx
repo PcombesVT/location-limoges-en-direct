@@ -80,11 +80,18 @@ export function Home() {
           <div className="property-grid">
             {apartments.map((apt) => (
               <div key={apt.id} className="glass-card">
-                <img 
-                  src={apt.images[0]} 
-                  alt={apt.title} 
-                  style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', marginBottom: '1rem', filter: apt.rented ? 'grayscale(80%) opacity(80%)' : 'none' }} 
-                />
+                <div style={{ position: 'relative', width: '100%', marginBottom: '1rem' }}>
+                  <img 
+                    src={apt.images[0]} 
+                    alt={apt.title} 
+                    style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', display: 'block', filter: apt.rented ? 'grayscale(100%) opacity(60%)' : 'none' }} 
+                  />
+                  {apt.rented && (
+                    <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(239, 68, 68, 0.9)', color: 'white', padding: '0.5rem 1rem', fontSize: '1.2rem', fontWeight: 'bold', borderRadius: '4px', border: '1px solid white', zIndex: 10, textAlign: 'center', pointerEvents: 'none' }}>
+                      LOUÉ
+                    </div>
+                  )}
+                </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                   <span className={`badge ${apt.rented ? '' : apt.available ? 'badge-success' : 'badge-warning'}`} style={apt.rented ? {background: '#EF4444', color: 'white'} : {}}>
                     {apt.rented ? 'DÉJÀ LOUÉ' : apt.available ? 'Disponible' : `Le ${apt.availableDateStr}`}
