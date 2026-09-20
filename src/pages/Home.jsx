@@ -19,6 +19,7 @@ export function Home() {
         size: doc.surface || 0,
         type: doc.bedrooms > 0 ? `T${doc.bedrooms + 1}` : 'Studio',
         available: doc.availableDate ? new Date(doc.availableDate) <= new Date() : true,
+        availableDateStr: doc.availableDate ? new Date(doc.availableDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' }) : null,
         images: doc.images ? doc.images.map(img => urlFor(img).url()) : ['/placeholder.svg'],
         features: [
           doc.fiber && 'Fibre Optique',
@@ -85,7 +86,7 @@ export function Home() {
                 />
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                   <span className={`badge ${apt.available ? 'badge-success' : 'badge-warning'}`}>
-                    {apt.available ? 'Disponible' : 'Bientôt Dispo'}
+                    {apt.available ? 'Disponible' : `Le ${apt.availableDateStr}`}
                   </span>
                   <span style={{ fontWeight: 'bold', color: 'var(--accent-secondary)' }}>{apt.type} • {apt.size}m²</span>
                 </div>

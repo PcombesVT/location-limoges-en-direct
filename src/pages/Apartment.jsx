@@ -21,6 +21,7 @@ export function Apartment() {
           size: doc.surface || 0,
           type: doc.bedrooms > 0 ? `T${doc.bedrooms + 1}` : 'Studio',
           available: doc.availableDate ? new Date(doc.availableDate) <= new Date() : true,
+          availableDateStr: doc.availableDate ? new Date(doc.availableDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) : null,
           images: doc.images ? doc.images.map(img => urlFor(img).url()) : ['/placeholder.svg'],
           features: [
             doc.fiber && 'Fibre Optique',
@@ -93,7 +94,7 @@ export function Apartment() {
           
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap' }}>
             <span className={`badge ${apt.available ? 'badge-success' : 'badge-warning'}`}>
-              {apt.available ? 'Disponible de suite' : 'Bientôt Disponible'}
+              {apt.available ? 'Disponible de suite' : `Dispo le ${apt.availableDateStr}`}
             </span>
             <span className="badge" style={{background: 'rgba(236,72,153,0.1)', color: '#ec4899'}}>🔥 0€ Frais d'Agence</span>
             <span className="badge" style={{background: 'rgba(56,189,248,0.1)', color: '#38bdf8'}}>Eligible APL / ALS</span>
@@ -109,7 +110,15 @@ export function Apartment() {
           
           {/* Colonne Gauche : Photos & Description */}
           <div>
-            <img src={apt.images[0]} alt={apt.title} style={{width: '100%', height: '450px', objectFit: 'cover', borderRadius: 'var(--border-radius)', marginBottom: '2rem', boxShadow: 'var(--shadow-lg)'}} />
+            <img src={apt.images[0]} alt={apt.title} style={{width: '100%', height: '450px', objectFit: 'cover', borderRadius: 'var(--border-radius)', marginBottom: '1rem', boxShadow: 'var(--shadow-lg)'}} />
+            
+            {apt.images.length > 1 && (
+              <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: '1rem', marginBottom: '2rem'}}>
+                {apt.images.slice(1).map((img, idx) => (
+                  <img key={idx} src={img} alt={`${apt.title} - vue ${idx+2}`} style={{width: '100%', height: '100px', objectFit: 'cover', borderRadius: '8px', cursor: 'pointer', boxShadow: 'var(--shadow-sm)', transition: 'transform 0.2s'}} onMouseOver={e => e.currentTarget.style.transform='scale(1.05)'} onMouseOut={e => e.currentTarget.style.transform='scale(1)'} onClick={() => window.open(img, '_blank')} />
+                ))}
+              </div>
+            )}
             
             <h2 style={{borderBottom: '1px solid var(--glass-border)', paddingBottom: '1rem', marginTop: '3rem', fontSize: '1.8rem'}}>Description</h2>
             <p style={{color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8'}}>{apt.description}</p>
