@@ -20,6 +20,7 @@ export function Home() {
         type: doc.bedrooms > 0 ? `T${doc.bedrooms + 1}` : 'Studio',
         available: doc.availableDate ? new Date(doc.availableDate) <= new Date() : true,
         availableDateStr: doc.availableDate ? new Date(doc.availableDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' }) : null,
+        rented: doc.rented || false,
         images: doc.images ? doc.images.map(img => urlFor(img).url()) : ['/placeholder.svg'],
         features: [
           doc.fiber && 'Fibre Optique',
@@ -82,11 +83,11 @@ export function Home() {
                 <img 
                   src={apt.images[0]} 
                   alt={apt.title} 
-                  style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', marginBottom: '1rem' }} 
+                  style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', marginBottom: '1rem', filter: apt.rented ? 'grayscale(80%) opacity(80%)' : 'none' }} 
                 />
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                  <span className={`badge ${apt.available ? 'badge-success' : 'badge-warning'}`}>
-                    {apt.available ? 'Disponible' : `Le ${apt.availableDateStr}`}
+                  <span className={`badge ${apt.rented ? '' : apt.available ? 'badge-success' : 'badge-warning'}`} style={apt.rented ? {background: '#EF4444', color: 'white'} : {}}>
+                    {apt.rented ? 'DÉJÀ LOUÉ' : apt.available ? 'Disponible' : `Le ${apt.availableDateStr}`}
                   </span>
                   <span style={{ fontWeight: 'bold', color: 'var(--accent-secondary)' }}>{apt.type} • {apt.size}m²</span>
                 </div>

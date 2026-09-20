@@ -34,7 +34,8 @@ export function Apartment() {
           ].filter(Boolean),
           description: doc.description || 'Description à venir.',
           dpe: doc.dpe || null,
-          ges: doc.ges || null
+          ges: doc.ges || null,
+          rented: doc.rented || false
         });
       }
       setLoading(false);
@@ -95,8 +96,8 @@ export function Apartment() {
           <Link to="/" className="btn btn-outline" style={{marginBottom: '2rem', textDecoration: 'none'}}>← Retour aux locs</Link>
           
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap' }}>
-            <span className={`badge ${apt.available ? 'badge-success' : 'badge-warning'}`}>
-              {apt.available ? 'Disponible de suite' : `Dispo le ${apt.availableDateStr}`}
+            <span className={`badge ${apt.rented ? '' : apt.available ? 'badge-success' : 'badge-warning'}`} style={apt.rented ? {background: '#EF4444', color: 'white'} : {}}>
+              {apt.rented ? 'DÉJÀ LOUÉ' : apt.available ? 'Disponible de suite' : `Dispo le ${apt.availableDateStr}`}
             </span>
             <span className="badge" style={{background: 'rgba(236,72,153,0.1)', color: '#ec4899'}}>🔥 0€ Frais d'Agence</span>
             <span className="badge" style={{background: 'rgba(56,189,248,0.1)', color: '#38bdf8'}}>Eligible APL / ALS</span>
@@ -112,12 +113,12 @@ export function Apartment() {
           
           {/* Colonne Gauche : Photos & Description */}
           <div>
-            <img src={apt.images[0]} alt={apt.title} style={{width: '100%', height: '450px', objectFit: 'cover', borderRadius: 'var(--border-radius)', marginBottom: '1rem', boxShadow: 'var(--shadow-lg)'}} />
+            <img src={apt.images[0]} alt={apt.title} style={{width: '100%', height: '450px', objectFit: 'cover', borderRadius: 'var(--border-radius)', marginBottom: '1rem', boxShadow: 'var(--shadow-lg)', filter: apt.rented ? 'grayscale(80%) opacity(80%)' : 'none'}} />
             
             {apt.images.length > 1 && (
               <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: '1rem', marginBottom: '2rem'}}>
                 {apt.images.slice(1).map((img, idx) => (
-                  <img key={idx} src={img} alt={`${apt.title} - vue ${idx+2}`} style={{width: '100%', height: '100px', objectFit: 'cover', borderRadius: '8px', cursor: 'pointer', boxShadow: 'var(--shadow-sm)', transition: 'transform 0.2s'}} onMouseOver={e => e.currentTarget.style.transform='scale(1.05)'} onMouseOut={e => e.currentTarget.style.transform='scale(1)'} onClick={() => window.open(img, '_blank')} />
+                  <img key={idx} src={img} alt={`${apt.title} - vue ${idx+2}`} style={{width: '100%', height: '100px', objectFit: 'cover', borderRadius: '8px', cursor: 'pointer', boxShadow: 'var(--shadow-sm)', transition: 'transform 0.2s', filter: apt.rented ? 'grayscale(80%) opacity(80%)' : 'none'}} onMouseOver={e => e.currentTarget.style.transform='scale(1.05)'} onMouseOut={e => e.currentTarget.style.transform='scale(1)'} onClick={() => window.open(img, '_blank')} />
                 ))}
               </div>
             )}
@@ -164,10 +165,12 @@ export function Apartment() {
               </div>
             </div>
 
-            <button onClick={handleDepositClick} className="btn btn-primary" style={{width: '100%', marginBottom: '1rem', padding: '1.2rem', cursor: 'pointer'}}>
-              Déposer mon dossier 🚀
+            <button onClick={handleDepositClick} disabled={apt.rented} className="btn btn-primary" style={{width: '100%', marginBottom: '1rem', padding: '1.2rem', cursor: apt.rented ? 'not-allowed' : 'pointer', opacity: apt.rented ? 0.5 : 1}}>
+              {apt.rented ? 'Appartement Loué ❌' : 'Déposer mon dossier 🚀'}
             </button>
-            <p style={{fontSize: '0.85rem', textAlign: 'center', color: 'var(--text-secondary)'}}>Contactez moi en direct. Etude rapide des garanties.</p>
+            <p style={{fontSize: '0.85rem', textAlign: 'center', color: 'var(--text-secondary)'}}>
+              {apt.rented ? 'Cet appartement n\'accepte plus de candidatures pour le moment.' : 'Contactez moi en direct. Etude rapide des garanties.'}
+            </p>
           </div>
 
         </div>
