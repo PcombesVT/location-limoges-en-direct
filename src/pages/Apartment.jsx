@@ -39,7 +39,8 @@ export function Apartment() {
           apl: doc.apl || false,
           als: doc.als || false,
           floor: doc.floor || null,
-          heatingType: doc.heatingType || null
+          heatingType: doc.heatingType || null,
+          ref: doc.begipRef || null
         });
       }
       setLoading(false);
@@ -81,6 +82,14 @@ export function Apartment() {
   const handleDepositClick = () => {
     const input = document.getElementById('bien-input');
     if (input) input.value = apt.title;
+    
+    // Modification dynamique du texte de la modale si c'est une alerte
+    const modalTitle = document.getElementById('modal-title-text');
+    if (modalTitle) modalTitle.innerText = apt.rented ? "Créer une alerte e-mail" : "Déposer un Dossier";
+    
+    const modalBtn = document.getElementById('modal-submit-btn');
+    if (modalBtn) modalBtn.innerText = apt.rented ? "Créer mon alerte" : "Envoyer ma candidature";
+
     const modal = document.getElementById('lead-modal');
     if (modal) modal.showModal();
   };
@@ -201,12 +210,18 @@ export function Apartment() {
               </div>
             </div>
 
-            <button onClick={handleDepositClick} disabled={apt.rented} className="btn btn-primary" style={{width: '100%', marginBottom: '1rem', padding: '1.2rem', cursor: apt.rented ? 'not-allowed' : 'pointer', opacity: apt.rented ? 0.5 : 1}}>
-              {apt.rented ? 'Appartement Loué ❌' : 'Déposer mon dossier 🚀'}
+            <button onClick={handleDepositClick} className={`btn ${apt.rented ? 'btn-outline' : 'btn-primary'}`} style={{width: '100%', marginBottom: '1rem', padding: '1.2rem'}}>
+              {apt.rented ? '🔔 Recevoir une alerte' : 'Déposer mon dossier 🚀'}
             </button>
             <p style={{fontSize: '0.85rem', textAlign: 'center', color: 'var(--text-secondary)'}}>
-              {apt.rented ? 'Cet appartement n\'accepte plus de candidatures pour le moment.' : 'Contactez moi en direct. Etude rapide des garanties.'}
+              {apt.rented ? 'Ce bien est loué. Laissez votre contact pour être alerté(e) des prochaines disponibilités.' : 'Contactez moi en direct. Etude rapide des garanties.'}
             </p>
+            
+            {apt.ref && (
+              <div style={{marginTop: '1.5rem', textAlign: 'center', color: 'rgba(255,255,255,0.2)', fontSize: '0.75rem'}}>
+                Réf: {apt.ref}
+              </div>
+            )}
           </div>
 
         </div>

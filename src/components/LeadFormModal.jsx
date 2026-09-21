@@ -41,7 +41,7 @@ export function LeadFormModal() {
   return (
     <dialog id="lead-modal" style={{ padding: '2rem', borderRadius: '12px', border: '1px solid var(--glass-border)', background: '#111827', color: 'white', maxWidth: '500px', width: '90%' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-        <h2 style={{ fontSize: '1.5rem', margin: 0 }}>Déposer un Dossier</h2>
+        <h2 id="modal-title-text" style={{ fontSize: '1.5rem', margin: 0 }}>Déposer un Dossier</h2>
         <button onClick={() => document.getElementById('lead-modal').close()} style={{ background: 'transparent', border: 'none', color: 'white', fontSize: '1.5rem', cursor: 'pointer' }}>&times;</button>
       </div>
 
@@ -92,7 +92,7 @@ export function LeadFormModal() {
             <textarea name="message" rows="3" style={{ width: '100%', padding: '0.8rem', borderRadius: '6px', border: '1px solid #374151', background: '#1F2937', color: 'white' }}></textarea>
           </div>
 
-          <button type="submit" disabled={status === 'submitting'} className="btn btn-primary" style={{ width: '100%', padding: '1rem', marginTop: '0.5rem', fontSize: '1.1rem' }}>
+          <button id="modal-submit-btn" type="submit" disabled={status === 'submitting'} className="btn btn-primary" style={{ width: '100%', padding: '1rem', marginTop: '0.5rem', fontSize: '1.1rem' }}>
             {status === 'submitting' ? 'Envoi en cours...' : 'Envoyer ma candidature'}
           </button>
           
