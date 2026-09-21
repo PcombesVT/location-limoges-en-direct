@@ -218,7 +218,7 @@ export function Apartment() {
             </p>
             
             {apt.ref && (
-              <div style={{marginTop: '1.5rem', textAlign: 'center', color: 'rgba(255,255,255,0.2)', fontSize: '0.75rem'}}>
+              <div style={{marginTop: '1.5rem', textAlign: 'center', color: 'var(--text-secondary)', fontSize: '0.9rem'}}>
                 Réf: {apt.ref}
               </div>
             )}
