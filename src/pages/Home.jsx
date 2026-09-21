@@ -59,9 +59,34 @@ export function Home() {
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '700px', margin: '0 auto 2rem auto', lineHeight: '1.6' }}>
             Louez votre logement étudiant à Limoges en direct avec le propriétaire. Parcourez nos disponibilités de studios, T1 et T2 meublés. Profitez d'une location entre particuliers avec zéro frais d'agence. Logements éligibles aux aides de la CAF (APL / ALS).
           </p>
-          <a href="#appartements" className="btn btn-primary" style={{ fontSize: '1.1rem', padding: '1rem 2rem' }}>
+          <a href="#appartements" className="btn btn-primary" style={{ fontSize: '1.1rem', padding: '1rem 2rem', marginBottom: '3rem', display: 'inline-block' }}>
             Voir les appartements disponibles
           </a>
+
+          {/* BLOC CONFIANCE */}
+          <div className="glass-card" style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'left', padding: '2rem' }}>
+            <h2 style={{ fontSize: '1.5rem', marginBottom: '1.5rem', textAlign: 'center' }}>Louez en toute confiance, entre particuliers</h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
+              <div>
+                <div style={{fontSize: '1.5rem', marginBottom: '0.5rem'}}>✅</div>
+                <h3 style={{fontSize: '1.1rem', marginBottom: '0.5rem'}}>Des biens réels & visitables</h3>
+                <p style={{color: 'var(--text-secondary)', fontSize: '0.95rem'}}>Chaque annonce correspond à un logement existant, que vous visitez avant tout engagement.</p>
+              </div>
+              <div>
+                <div style={{fontSize: '1.5rem', marginBottom: '0.5rem'}}>✅</div>
+                <h3 style={{fontSize: '1.1rem', marginBottom: '0.5rem'}}>Un propriétaire identifié</h3>
+                <p style={{color: 'var(--text-secondary)', fontSize: '0.95rem'}}>Vous savez à qui vous louez (voir mentions légales), et vous échangez en direct.</p>
+              </div>
+              <div>
+                <div style={{fontSize: '1.5rem', marginBottom: '0.5rem'}}>✅</div>
+                <h3 style={{fontSize: '1.1rem', marginBottom: '0.5rem'}}>Zéro frais d'agence</h3>
+                <p style={{color: 'var(--text-secondary)', fontSize: '0.95rem'}}>Zéro commission cachée. Vous ne payez que le loyer et le dépôt prévus au bail.</p>
+              </div>
+            </div>
+            <div style={{ textAlign: 'center', fontSize: '0.85rem', color: 'var(--text-secondary)', borderTop: '1px solid var(--glass-border)', paddingTop: '1rem' }}>
+              🔒 Par prudence, ne versez jamais d'argent avant d'avoir visité le logement et signé le bail.
+            </div>
+          </div>
         </div>
       </header>
 

@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider, Outlet, Link } from 'react-router-
 import { Home } from './pages/Home';
 import { Apartment } from './pages/Apartment';
 import { LegalMentions } from './pages/LegalMentions';
+import { LouerSansAgence } from './pages/LouerSansAgence';
 import { LeadFormModal } from './components/LeadFormModal';
 
 const Layout = () => {
@@ -14,7 +15,7 @@ const Layout = () => {
             Location-Limoges-En-Direct.fr
           </Link>
           <div>
-            <Link to="/" className="btn btn-outline" style={{marginRight: '1rem', textDecoration: 'none'}}>Les Locs</Link>
+            <Link to="/louer-sans-agence-limoges" className="btn btn-outline" style={{marginRight: '1rem', textDecoration: 'none'}}>Comment ça marche</Link>
             <button className="btn btn-primary" onClick={() => document.getElementById('lead-modal').showModal()}>Déposer un Dossier</button>
           </div>
         </div>
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: "mentions-legales",
         element: <LegalMentions />
+      },
+      {
+        path: "louer-sans-agence-limoges",
+        element: <LouerSansAgence />
       }
     ]
   }
