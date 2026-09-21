@@ -142,6 +142,60 @@ async function buildSEO() {
     fs.writeFileSync(path.join(aptDir, 'index.html'), aptHtml);
   }
   
+  // ==========================================
+  // 4. GÉNÉRATION DE LA PAGE PILIER FAQ
+  // ==========================================
+  console.log('Génération de la page Pilier (louer-sans-agence)...');
+  const pilierDir = path.join(distPath, 'louer-sans-agence-limoges');
+  if (!fs.existsSync(pilierDir)) {
+    fs.mkdirSync(pilierDir, { recursive: true });
+  }
+
+  const faqData = [
+    { question: "Faut-il payer des frais d'agence pour louer sur ce site ?", answer: "Non. Vous louez directement au propriétaire..." },
+    { question: "Quels documents pour un dossier de location entre particuliers ?", answer: "En général : une pièce d'identité..." },
+    { question: "Comment se passent la visite et la signature du bail sans agence ?", answer: "Vous convenez d'un rendez-vous directement avec le propriétaire..." },
+    { question: "Peut-on toucher les APL en louant en direct auprès d'un propriétaire ?", answer: "Oui. Les aides au logement de la CAF (APL/ALS) ne dépendent pas du passage par une agence..." },
+    { question: "Comment fonctionne le dépôt de garantie ?", answer: "Un dépôt de garantie est versé à la signature du bail..." },
+    { question: "Comment éviter les arnaques en location entre particuliers ?", answer: "Ne versez jamais d'argent avant d'avoir visité le logement..." }
+  ];
+
+  const pilierJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqData.map(item => ({
+      "@type": "Question",
+      "name": item.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer
+      }
+    }))
+  };
+
+  const pilierMeta = `
+    <title>Louer sans agence à Limoges — entre particuliers, en direct | Location Limoges en Direct</title>
+    <meta name="description" content="Comment louer à Limoges sans passer par une agence ? Location entre particuliers, en direct avec le propriétaire : zéro frais d'agence, un interlocuteur unique, des biens réels et éligibles APL." />
+    <link rel="canonical" href="https://www.location-limoges-en-direct.fr/louer-sans-agence-limoges" />
+    <meta property="og:title" content="Louer sans agence à Limoges — entre particuliers, en direct | Location Limoges en Direct" />
+    <meta property="og:description" content="Comment louer à Limoges sans passer par une agence ? Location entre particuliers, en direct avec le propriétaire : zéro frais d'agence, un interlocuteur unique, des biens réels et éligibles APL." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.location-limoges-en-direct.fr/louer-sans-agence-limoges" />
+  `;
+
+  const pilierBodyInjection = `
+    <h1>Louer sans agence à Limoges, en direct avec le propriétaire</h1>
+    <p>À Limoges, il est tout à fait possible de louer un appartement sans passer par une agence. Ici, vous traitez directement avec le propriétaire : pas d'intermédiaire, pas de commission, pas de frais de dossier d'agence.</p>
+  `;
+
+  let pilierHtml = baseHtml
+    .replace(/<title>.*?<\/title>/, '')
+    .replace(/<meta name="description".*?>/i, '')
+    .replace('</head>', `${pilierMeta}\n<script type="application/ld+json">${JSON.stringify(pilierJsonLd)}</script>\n</head>`)
+    .replace('<div id="root"></div>', `<div id="root">${pilierBodyInjection}</div>`);
+    
+  fs.writeFileSync(path.join(pilierDir, 'index.html'), pilierHtml);
+
   console.log('--- Injection SEO terminée avec succès ! ---');
 }
 
