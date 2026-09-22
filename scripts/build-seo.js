@@ -41,14 +41,21 @@ async function buildSEO() {
   
   // Injection du corps statique minimal pour la Home
   const homeBodyInjection = `
+    <div style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">DE PARTICULIER À PARTICULIER</div>
     <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Location appartement & studio à Limoges — Sans agence, direct propriétaire.</h1>
-    <p style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Louez votre logement étudiant à Limoges en direct avec le propriétaire. Parcourez nos disponibilités de studios, T1 et T2 meublés. Profitez d'une location entre particuliers avec zéro frais d'agence. Logements éligibles aux aides de la CAF (APL / ALS).</p>
+    <p style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Louez votre logement étudiant à Limoges de particulier à particulier, en direct avec le propriétaire. Parcourez nos disponibilités de studios, T1 et T2 meublés. Profitez d'une location entre particuliers avec zéro frais d'agence. Logements éligibles aux aides de la CAF (APL / ALS).</p>
+  `;
+  
+  const globalFooterInjection = `
+    <footer style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
+      Location-Limoges-En-Direct.fr - Zéro frais d'agence, de particulier à particulier. Garantie Visale et ALS / APL acceptées.
+    </footer>
   `;
   
   let homeHtml = baseHtml
     .replace(/<title>.*?<\/title>/, `<title>${homeTitle}</title>`)
     .replace(/<meta name="description".*?>/i, `<meta name="description" content="${homeDesc}" />`)
-    .replace('<div id="root"></div>', `<div id="root">${homeBodyInjection}</div>`);
+    .replace('<div id="root"></div>', `<div id="root">${homeBodyInjection}${globalFooterInjection}</div>`);
     
   fs.writeFileSync(indexPath, homeHtml);
   
@@ -136,7 +143,7 @@ async function buildSEO() {
       .replace(/<title>.*?<\/title>/, '') // Supprime le titre générique
       .replace(/<meta name="description".*?>/i, '') // Supprime la desc générique
       .replace('</head>', `${metaTags}\n${jsonLdScript}\n</head>`) // Ajoute le nouveau Head
-      .replace('<div id="root"></div>', `<div id="root">${bodyInjection}</div>`); // Injecte le corps
+      .replace('<div id="root"></div>', `<div id="root">${bodyInjection}${globalFooterInjection}</div>`); // Injecte le corps
       
     // Sauvegarder dans dist/logement/slug/index.html
     fs.writeFileSync(path.join(aptDir, 'index.html'), aptHtml);
@@ -184,15 +191,16 @@ async function buildSEO() {
   `;
 
   const pilierBodyInjection = `
+    <div style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">DE PARTICULIER À PARTICULIER</div>
     <h1>Louer sans agence à Limoges, en direct avec le propriétaire</h1>
-    <p>À Limoges, il est tout à fait possible de louer un appartement sans passer par une agence. Ici, vous traitez directement avec le propriétaire : pas d'intermédiaire, pas de commission, pas de frais de dossier d'agence.</p>
+    <p>À Limoges, il est tout à fait possible de louer de particulier à particulier, sans passer par une agence : vous traitez directement avec le propriétaire. Pas d'intermédiaire, pas de commission, pas de frais de dossier d'agence.</p>
   `;
 
   let pilierHtml = baseHtml
     .replace(/<title>.*?<\/title>/, '')
     .replace(/<meta name="description".*?>/i, '')
     .replace('</head>', `${pilierMeta}\n<script type="application/ld+json">${JSON.stringify(pilierJsonLd)}</script>\n</head>`)
-    .replace('<div id="root"></div>', `<div id="root">${pilierBodyInjection}</div>`);
+    .replace('<div id="root"></div>', `<div id="root">${pilierBodyInjection}${globalFooterInjection}</div>`);
     
   fs.writeFileSync(path.join(pilierDir, 'index.html'), pilierHtml);
 

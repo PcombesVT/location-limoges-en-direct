@@ -45,7 +45,7 @@ export function Home() {
     <>
       <Helmet>
         <title>Location appartement & studio à Limoges — entre particuliers, sans agence | En Direct</title>
-        <meta name="description" content="Location d'appartements et studios à Limoges en direct du propriétaire. Zéro frais d'agence, entre particuliers. Logements meublés étudiants éligibles APL/ALS." />
+        <meta name="description" content="Location d'appartements et studios à Limoges de particulier à particulier, en direct du propriétaire. Zéro frais d'agence, entre particuliers. Logements meublés étudiants éligibles APL/ALS." />
         <link rel="canonical" href="https://www.location-limoges-en-direct.fr/" />
       </Helmet>
       
@@ -57,7 +57,7 @@ export function Home() {
             <span className="text-gradient">Sans agence, direct propriétaire.</span>
           </h1>
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '700px', margin: '0 auto 2rem auto', lineHeight: '1.6' }}>
-            Louez votre logement étudiant à Limoges en direct avec le propriétaire. Parcourez nos disponibilités de studios, T1 et T2 meublés. Profitez d'une location entre particuliers avec zéro frais d'agence. Logements éligibles aux aides de la CAF (APL / ALS).
+            Louez votre logement étudiant à Limoges de particulier à particulier, en direct avec le propriétaire. Parcourez nos disponibilités de studios, T1 et T2 meublés. Profitez d'une location entre particuliers avec zéro frais d'agence. Logements éligibles aux aides de la CAF (APL / ALS).
           </p>
           <a href="#appartements" className="btn btn-primary" style={{ fontSize: '1.1rem', padding: '1rem 2rem', marginBottom: '3rem', display: 'inline-block' }}>
             Voir les appartements disponibles

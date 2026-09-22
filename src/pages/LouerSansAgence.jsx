@@ -68,7 +68,7 @@ export function LouerSansAgence() {
             Louer sans agence à Limoges, en direct avec le propriétaire
           </h1>
           <p style={{fontSize: '1.2rem', color: 'var(--text-secondary)', maxWidth: '800px', margin: '0 auto'}}>
-            À Limoges, il est tout à fait possible de louer un appartement <strong>sans passer par une agence</strong>. Ici, vous traitez <strong>directement avec le propriétaire</strong> : pas d'intermédiaire, pas de commission, pas de frais de dossier d'agence. Vous économisez, et vous avez un <strong>interlocuteur unique</strong> du premier contact jusqu'à la remise des clés.
+            À Limoges, il est tout à fait possible de louer <strong>de particulier à particulier</strong>, sans passer par une agence : vous traitez <strong>directement avec le propriétaire</strong>. Pas d'intermédiaire, pas de commission, pas de frais de dossier d'agence. Vous économisez, et vous avez un <strong>interlocuteur unique</strong> du premier contact jusqu'à la remise des clés.
           </p>
         </div>
       </header>
