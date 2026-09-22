@@ -37,7 +37,7 @@ async function buildSEO() {
   // ==========================================
   console.log('Optimisation de la Home...');
   const homeTitle = 'Location appartement & studio à Limoges — entre particuliers, sans agence | En Direct';
-  const homeDesc = 'Location d\'appartements et studios à Limoges en direct du propriétaire. Zéro frais d\'agence, entre particuliers. Logements meublés étudiants éligibles APL/ALS.';
+  const homeDesc = 'Location d\'appartements et studios à Limoges de particulier à particulier, en direct du propriétaire. Zéro frais d\'agence, entre particuliers. Logements meublés étudiants éligibles APL/ALS.';
   
   // Injection du corps statique minimal pour la Home
   const homeBodyInjection = `
