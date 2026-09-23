@@ -136,8 +136,8 @@ export function Home() {
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', paddingTop: '1rem', borderTop: '1px solid var(--glass-border)' }}>
                   <div>
-                    <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{apt.price}€</span>
-                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>/mois + {apt.charges}€ ch.</span>
+                    <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{parseFloat((apt.price + (apt.charges || 0)).toFixed(2))}€</span>
+                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>/mois CC</span>
                   </div>
                   {apt.slug ? (
                     <Link to={`/logement/${apt.slug}`} className="btn btn-outline" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem', cursor: 'pointer', textDecoration: 'none' }}>Voir la fiche</Link>

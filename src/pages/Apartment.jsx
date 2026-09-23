@@ -76,7 +76,7 @@ export function Apartment() {
     "numberOfRoomsTotal": apt.type === 'Studio' ? 1 : parseInt(apt.type.replace('T', '') || 1),
     "floorSize": { "@type": "QuantitativeValue", "value": apt.size, "unitCode": "MTK" },
     "address": { "@type": "PostalAddress", "streetAddress": apt.location, "addressLocality": "Limoges", "postalCode": "87000", "addressCountry": "FR" },
-    "offers": { "@type": "Offer", "price": apt.price, "priceCurrency": "EUR", "availability": apt.available ? "https://schema.org/InStock" : "https://schema.org/PreOrder" }
+    "offers": { "@type": "Offer", "price": parseFloat((apt.price + (apt.charges || 0)).toFixed(2)), "priceCurrency": "EUR", "availability": apt.available ? "https://schema.org/InStock" : "https://schema.org/PreOrder" }
   };
 
   const handleDepositClick = () => {
@@ -98,17 +98,17 @@ export function Apartment() {
     <>
       <Helmet>
         <title>{`${apt.title} | Location Limoges en Direct`}</title>
-        <meta name="description" content={`Découvrez ce ${apt.type} de ${apt.size}m² à louer sur Limoges. Loyer : ${apt.price}€/mois sans frais d'agence.`} />
+        <meta name="description" content={`Découvrez ce ${apt.type} de ${apt.size}m² à louer sur Limoges. Loyer : ${parseFloat((apt.price + (apt.charges || 0)).toFixed(2))}€/mois charges comprises, sans frais d'agence.`} />
         <link rel="canonical" href={`https://www.location-limoges-en-direct.fr/logement/${slug}`} />
         <meta property="og:title" content={`${apt.title} | Location Limoges en Direct`} />
-        <meta property="og:description" content={`Découvrez ce ${apt.type} de ${apt.size}m² à louer sur Limoges. Loyer : ${apt.price}€/mois sans frais d'agence.`} />
+        <meta property="og:description" content={`Découvrez ce ${apt.type} de ${apt.size}m² à louer sur Limoges. Loyer : ${parseFloat((apt.price + (apt.charges || 0)).toFixed(2))}€/mois charges comprises, sans frais d'agence.`} />
         <meta property="og:type" content="article" />
         <meta property="og:url" content={`https://www.location-limoges-en-direct.fr/logement/${slug}`} />
         <meta property="og:image" content={apt.images[0]} />
         <meta property="og:locale" content="fr_FR" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${apt.title} | Location Limoges en Direct`} />
-        <meta name="twitter:description" content={`Découvrez ce ${apt.type} de ${apt.size}m² à louer sur Limoges. Loyer : ${apt.price}€/mois sans frais d'agence.`} />
+        <meta name="twitter:description" content={`Découvrez ce ${apt.type} de ${apt.size}m² à louer sur Limoges. Loyer : ${parseFloat((apt.price + (apt.charges || 0)).toFixed(2))}€/mois charges comprises, sans frais d'agence.`} />
         <meta name="twitter:image" content={apt.images[0]} />
         <script type="application/ld+json">
           {JSON.stringify(jsonLd)}
@@ -172,7 +172,7 @@ export function Apartment() {
           {/* Colonne Droite : Prix et Action */}
           <div className="glass-card" style={{position: 'sticky', top: '120px', border: '1px solid rgba(255,255,255,0.15)'}}>
             <div style={{borderBottom: '1px solid var(--glass-border)', paddingBottom: '1.5rem', marginBottom: '1.5rem'}}>
-              <div style={{fontSize: '3rem', fontWeight: 'bold'}}>{apt.price}€<span style={{fontSize:'1.2rem', fontWeight:'normal', color:'var(--text-secondary)'}}> / mois</span></div>
+              <div style={{fontSize: '3rem', fontWeight: 'bold'}}>{parseFloat((apt.price + (apt.charges || 0)).toFixed(2))}€<span style={{fontSize:'1.2rem', fontWeight:'normal', color:'var(--text-secondary)'}}> / mois</span></div>
               <div style={{color: 'var(--text-secondary)'}}>Loyer toutes charges comprises</div>
               <div style={{fontSize: '0.9rem', color: 'var(--text-secondary)', marginTop: '0.5rem'}}>Dont {apt.charges}€ de charges.</div>
             </div>
