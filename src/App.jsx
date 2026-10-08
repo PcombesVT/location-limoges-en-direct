@@ -4,6 +4,7 @@ import { Home } from './pages/Home';
 import { Apartment } from './pages/Apartment';
 import { LegalMentions } from './pages/LegalMentions';
 import { LouerSansAgence } from './pages/LouerSansAgence';
+import { LogementEtudiant } from './pages/LogementEtudiant';
 import { LeadFormModal } from './components/LeadFormModal';
 
 const Layout = () => {
@@ -15,6 +16,7 @@ const Layout = () => {
             Location-Limoges-En-Direct.fr
           </Link>
           <div>
+            <Link to="/logement-etudiant-limoges" className="btn btn-outline" style={{marginRight: '1rem', textDecoration: 'none', border: 'none', background: 'transparent'}}>Logement Étudiant</Link>
             <Link to="/louer-sans-agence-limoges" className="btn btn-outline" style={{marginRight: '1rem', textDecoration: 'none'}}>Comment ça marche</Link>
             <button className="btn btn-primary" onClick={() => document.getElementById('lead-modal').showModal()}>Déposer un Dossier</button>
           </div>
@@ -29,7 +31,8 @@ const Layout = () => {
         <p>Location-Limoges-En-Direct.fr - Zéro frais d'agence, de particulier à particulier.</p>
         <p style={{marginTop: '0.5rem'}}>Garantie Visale et ALS / APL acceptées.</p>
         <p style={{marginTop: '1rem'}}>
-          <Link to="/mentions-legales" style={{color: 'var(--text-secondary)', textDecoration: 'none'}}>Mentions Légales</Link>
+          <Link to="/mentions-legales" style={{color: 'var(--text-secondary)', textDecoration: 'none', marginRight: '1rem'}}>Mentions Légales</Link>
+          <Link to="/logement-etudiant-limoges" style={{color: 'var(--text-secondary)', textDecoration: 'none'}}>Logement étudiant à Limoges</Link>
         </p>
       </footer>
     </>
@@ -56,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "louer-sans-agence-limoges",
         element: <LouerSansAgence />
+      },
+      {
+        path: "logement-etudiant-limoges",
+        element: <LogementEtudiant />
       }
     ]
   }
