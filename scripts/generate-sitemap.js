@@ -31,6 +31,11 @@ async function generateSitemap() {
     <loc>https://www.location-limoges-en-direct.fr/louer-sans-agence-limoges</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.location-limoges-en-direct.fr/logement-etudiant-limoges</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>`;
 
     apartments.forEach(apt => {

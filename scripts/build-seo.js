@@ -209,6 +209,64 @@ async function buildSEO() {
     
   fs.writeFileSync(path.join(pilierDir, 'index.html'), pilierHtml);
 
+  // ==========================================
+  // 5. GÉNÉRATION DE LA PAGE LOGEMENT ETUDIANT
+  // ==========================================
+  console.log('Génération de la page Logement Étudiant...');
+  const etudiantDir = path.join(distPath, 'logement-etudiant-limoges');
+  if (!fs.existsSync(etudiantDir)) {
+    fs.mkdirSync(etudiantDir, { recursive: true });
+  }
+
+  const etudiantFaqData = [
+    { question: "Peut-on louer un logement étudiant à Limoges sans agence ?", answer: "Oui. Tous les logements de ce site — studios, T1, appartements meublés — sont proposés directement par leurs propriétaires..." },
+    { question: "Comment trouver un studio étudiant de particulier à particulier à Limoges ?", answer: "Parcourez les annonces du site : chaque studio ou appartement est publié directement par son propriétaire..." },
+    { question: "Les logements étudiants sont-ils éligibles aux APL / ALS ?", answer: "Oui, selon votre situation et vos ressources, les logements loués ici ouvrent droit à l'APL ou à l'ALS..." },
+    { question: "Peut-on utiliser la garantie Visale pour louer en direct à Limoges ?", answer: "Oui, de nombreux propriétaires acceptent la garantie Visale (Action Logement), gratuite, qui remplace un garant physique..." },
+    { question: "Quels quartiers choisir pour un logement étudiant à Limoges ?", answer: "Le centre-ville est le plus pratique (Fac de Droit, IAE, 3IL, prépas, commerces, gare — tout à pied)..." }
+  ];
+
+  const etudiantJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": etudiantFaqData.map(item => ({
+      "@type": "Question",
+      "name": item.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer
+      }
+    }))
+  };
+
+  const etudiantMeta = `
+    <title>Logement étudiant à Limoges entre particuliers — studio & appartement meublé sans agence | Location Limoges en Direct</title>
+    <meta name="description" content="Logement étudiant à Limoges de particulier à particulier : studios et appartements meublés loués en direct par le propriétaire, sans frais d'agence. Éligibles APL/ALS, proches des facs, caution Visale acceptée selon le propriétaire." />
+    <link rel="canonical" href="https://www.location-limoges-en-direct.fr/logement-etudiant-limoges" />
+    <meta property="og:title" content="Logement étudiant à Limoges entre particuliers — studio & appartement meublé sans agence | Location Limoges en Direct" />
+    <meta property="og:description" content="Logement étudiant à Limoges de particulier à particulier : studios et appartements meublés loués en direct par le propriétaire, sans frais d'agence. Éligibles APL/ALS, proches des facs, caution Visale acceptée selon le propriétaire." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.location-limoges-en-direct.fr/logement-etudiant-limoges" />
+  `;
+
+  const etudiantBodyInjection = `
+    <h1>Logement étudiant à Limoges, entre particuliers</h1>
+    <h2>Pourquoi louer son logement étudiant de particulier à particulier à Limoges ?</h2>
+    <p>Pour un étudiant, louer de particulier à particulier à Limoges, c'est d'abord économiser les frais d'agence...</p>
+    <h2>Des studios et appartements meublés, proches des facs de Limoges</h2>
+    <p>Les logements proposés ici se situent surtout en centre-ville et à proximité des campus...</p>
+    <h2>APL, ALS, caution Visale : les aides pour les étudiants</h2>
+    <p>Les logements loués ici sont éligibles aux aides au logement de la CAF (APL ou ALS) selon votre situation...</p>
+  `;
+
+  let etudiantHtml = baseHtml
+    .replace(/<title>.*?<\/title>/, '')
+    .replace(/<meta name="description".*?>/i, '')
+    .replace('</head>', `${etudiantMeta}\n<script type="application/ld+json">${JSON.stringify(etudiantJsonLd)}</script>\n</head>`)
+    .replace('<div id="root"></div>', `<div id="root">${etudiantBodyInjection}${globalFooterInjection}</div>`);
+    
+  fs.writeFileSync(path.join(etudiantDir, 'index.html'), etudiantHtml);
+
   console.log('--- Injection SEO terminée avec succès ! ---');
 }
 
