@@ -44,6 +44,7 @@ async function buildSEO() {
     <div style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">DE PARTICULIER À PARTICULIER</div>
     <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Location appartement & studio à Limoges — Sans agence, direct propriétaire.</h1>
     <p style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Louez votre logement étudiant à Limoges de particulier à particulier, en direct avec le propriétaire. Parcourez nos disponibilités de studios, T1 et T2 meublés. Profitez d'une location entre particuliers avec zéro frais d'agence. Logements éligibles aux aides de la CAF (APL / ALS).</p>
+    <a href="/logement-etudiant-limoges" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Voir les logements étudiants à Limoges</a>
   `;
   
   const globalFooterInjection = `
@@ -199,6 +200,7 @@ async function buildSEO() {
     <p>À Limoges, il est tout à fait possible de louer de particulier à particulier, sans passer par une agence : vous traitez directement avec le propriétaire. Pas d'intermédiaire, pas de commission, pas de frais de dossier d'agence.</p>
     <h2>Louer de particulier à particulier à Limoges, sans intermédiaire</h2>
     <p>À Limoges, louer de particulier à particulier change tout : vous traitez en direct avec le propriétaire, sans intermédiaire et sans frais d'agence. Chaque logement de ce site est proposé directement par son propriétaire — vous le contactez, vous visitez, vous signez le bail avec lui. Pas de commission, pas de dossier payant, pas de file d'attente d'agence : juste une location entre particuliers, claire et directe. Que vous cherchiez un appartement ou un studio, vous louez ici sans frais d'agence : aucune commission, aucun honoraire, puisque vous traitez directement avec le propriétaire. C'est la façon la plus simple de trouver un studio, un T1 ou un T2 meublé à Limoges quand on cherche en direct, sans agence.</p>
+    <a href="/logement-etudiant-limoges" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Vous êtes étudiant ? Voir les logements étudiants à Limoges →</a>
   `;
 
   let pilierHtml = baseHtml
