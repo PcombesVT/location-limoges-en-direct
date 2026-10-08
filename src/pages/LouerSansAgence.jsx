@@ -134,9 +134,12 @@ export function LouerSansAgence() {
           </div>
         </div>
 
-        <div style={{textAlign: 'center', marginTop: '4rem'}}>
+        <div style={{textAlign: 'center', marginTop: '4rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap'}}>
           <Link to="/" className="btn btn-primary" style={{fontSize: '1.2rem', padding: '1rem 2rem', textDecoration: 'none'}}>
-            Voir les logements disponibles à Limoges
+            Voir tous les logements disponibles
+          </Link>
+          <Link to="/logement-etudiant-limoges" className="btn btn-outline" style={{fontSize: '1.2rem', padding: '1rem 2rem', textDecoration: 'none'}}>
+            Vous êtes étudiant ? Voir les logements étudiants à Limoges →
           </Link>
         </div>
 

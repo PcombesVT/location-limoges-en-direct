@@ -91,7 +91,18 @@ export function Home() {
       </header>
 
       <main className="container" id="appartements" style={{ paddingBottom: '80px' }}>
-        <h2 style={{ borderBottom: '1px solid var(--glass-border)', paddingBottom: '1rem' }}>Disponibilités Actuelles</h2>
+        
+        <div className="glass-card" style={{ marginBottom: '3rem', textAlign: 'center', background: 'rgba(59, 130, 246, 0.05)', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
+          <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Logement étudiant à Limoges, en direct et sans agence</h2>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', marginBottom: '1.5rem', maxWidth: '700px', margin: '0 auto 1.5rem auto' }}>
+            Étudiant à Limoges ? Trouvez un <strong>studio ou un appartement meublé de particulier à particulier</strong>, <strong>sans frais d'agence</strong>, éligible APL/ALS et proche des facs.
+          </p>
+          <Link to="/logement-etudiant-limoges" className="btn btn-primary" style={{ textDecoration: 'none', padding: '0.8rem 1.5rem' }}>
+            Voir les logements étudiants →
+          </Link>
+        </div>
+
+        <h2 style={{ borderBottom: '1px solid var(--glass-border)', paddingBottom: '1rem', marginTop: '2rem' }}>Disponibilités Actuelles</h2>
         
         {loading ? (
           <div style={{ textAlign: 'center', padding: '4rem 0', color: 'var(--text-secondary)' }}>
