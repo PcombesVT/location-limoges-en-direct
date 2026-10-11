@@ -43,6 +43,18 @@ export function LouerSansAgence() {
     {
       question: "Comment éviter les arnaques en location entre particuliers ?",
       answer: "Ne versez jamais d'argent avant d'avoir visité le logement et signé un bail. Méfiez-vous des annonces trop belles ou des propriétaires « à l'étranger » qui refusent la visite. Ici, les biens sont réels, le propriétaire est identifié dans les mentions légales et vous rencontre en personne."
+    },
+    {
+      question: "Est-il possible de louer son appartement sans agence à Limoges ?",
+      answer: "Oui, tout à fait. Un propriétaire peut louer son appartement sans agence, en le proposant directement de particulier à particulier. C'est précisément ce que permet ce site : publier son logement, être contacté en direct par les locataires, faire visiter et signer le bail soi-même — sans frais d'agence ni commission. Si vous êtes propriétaire à Limoges, vous pouvez déposer votre annonce et louer en direct."
+    },
+    {
+      question: "Comment trouver un logement sans passer par une agence à Limoges ?",
+      answer: "Pour trouver un logement sans passer par une agence à Limoges, parcourez les annonces publiées directement par les propriétaires : studios, T1 et T2 meublés, loués de particulier à particulier. Vous contactez le propriétaire via le formulaire, convenez d'une visite et signez le bail en direct avec lui — aucun intermédiaire, aucun frais d'agence."
+    },
+    {
+      question: "Quelles sont les conditions pour louer un studio à Limoges ?",
+      answer: "Pour louer un studio à Limoges de particulier à particulier, le propriétaire demande généralement une pièce d'identité, un justificatif de revenus (ou ceux d'un garant) et une attestation d'assurance habitation. Les studios proposés ici sont meublés et éligibles aux APL/ALS de la CAF, ce qui réduit le loyer réel. Tout se règle en direct avec le propriétaire, sans frais d'agence."
     }
   ];
 
@@ -90,7 +102,7 @@ export function LouerSansAgence() {
         <div className="glass-card" style={{marginBottom: '3rem'}}>
           <h2 style={{borderBottom: '1px solid var(--glass-border)', paddingBottom: '1rem', marginBottom: '1.5rem'}}>Louer de particulier à particulier à Limoges, sans intermédiaire</h2>
           <p style={{color: 'var(--text-secondary)', lineHeight: '1.8', fontSize: '1.1rem'}}>
-            À Limoges, louer <strong>de particulier à particulier</strong> change tout : vous traitez <strong>en direct avec le propriétaire</strong>, sans intermédiaire et sans frais d'agence. Chaque logement de ce site est proposé <strong>directement par son propriétaire</strong> — vous le contactez, vous visitez, vous signez le bail avec lui. Pas de commission, pas de dossier payant, pas de file d'attente d'agence : juste une <strong>location entre particuliers</strong>, claire et directe. Que vous cherchiez un <strong>appartement</strong> ou un studio, vous louez ici <strong>sans frais d'agence</strong> : aucune commission, aucun honoraire, puisque vous traitez <strong>directement avec le propriétaire</strong>. C'est la façon la plus simple de trouver un <strong>studio, un T1 ou un T2 meublé</strong> à Limoges quand on cherche <strong>en direct, sans agence</strong>.
+            À Limoges, louer <strong>de particulier à particulier</strong> change tout : vous traitez <strong>en direct avec le propriétaire</strong>, sans intermédiaire et sans frais d'agence. Chaque logement de ce site est proposé <strong>directement par son propriétaire</strong> — vous le contactez, vous visitez, vous signez le bail avec lui. Pas de commission, pas de dossier payant, pas de file d'attente d'agence : juste une <strong>location entre particuliers</strong>, claire et directe. Que vous cherchiez un <strong>appartement</strong> ou un studio, vous louez ici <strong>sans frais d'agence</strong> : aucune commission, aucun honoraire, puisque vous traitez <strong>directement avec le propriétaire</strong>. C'est la façon la plus simple de trouver un <strong>studio, un T1 ou un T2 meublé</strong> à Limoges quand on cherche <strong>en direct, sans agence</strong>. Vous cherchez un <strong>studio de particulier à particulier à Limoges</strong> ? C'est la spécialité de ce site : des <strong>studios meublés loués entre particuliers</strong>, en direct avec le propriétaire, sans frais d'agence — parfaits pour un budget étudiant, éligibles APL/ALS.
           </p>
         </div>
 
